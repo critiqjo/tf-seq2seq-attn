@@ -55,7 +55,7 @@ class Model():
             dec = seq2seq.BasicDecoder(dec_cell, helper_build_fn(),
                                        dec_cell.zero_state(batch_size, self._dtype))
 
-            dec_out, dec_state = seq2seq.dynamic_decode(dec, output_time_major=False,
+            dec_out, dec_state, final_sequence_lengths = seq2seq.dynamic_decode(dec, output_time_major=False,
                     maximum_iterations=decoder_maxiters, impute_finished=True)
 
         self.outputs = dec_out.rnn_output
